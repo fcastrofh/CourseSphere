@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import {
   BookOpen,
   Users,
@@ -13,6 +14,7 @@ import {
   ArrowRight,
   BarChart3,
   Activity,
+  Home,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -149,9 +151,17 @@ export default function Dashboard() {
     <div className="container mx-auto p-6 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Course Management Dashboard</h1>
-          <p className="text-muted-foreground">Overview of your online learning platform</p>
+        <div className="flex items-center gap-4">
+          <Link href="/">
+            <Button variant="outline" size="sm">
+              <Home className="mr-2 h-4 w-4" />
+              Home
+            </Button>
+          </Link>
+          <div>
+            <h1 className="text-3xl font-bold">Course Management Dashboard</h1>
+            <p className="text-muted-foreground">Overview of your online learning platform</p>
+          </div>
         </div>
         <div className="flex gap-2">
           <Button variant="outline">
@@ -242,55 +252,63 @@ export default function Dashboard() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5" />
-              Manage Courses
-            </CardTitle>
-            <CardDescription>Create and edit course content</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-between items-center">
-              <div className="text-sm text-muted-foreground">{dashboardData.stats.totalCourses} courses available</div>
-              <ArrowRight className="h-4 w-4" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2">
-              <Play className="h-5 w-5" />
-              Manage Lessons
-            </CardTitle>
-            <CardDescription>Create and organize lesson content</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-between items-center">
-              <div className="text-sm text-muted-foreground">{dashboardData.stats.totalLessons} lessons created</div>
-              <ArrowRight className="h-4 w-4" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2">
-              <Users className="h-5 w-5" />
-              Manage Instructors
-            </CardTitle>
-            <CardDescription>Add and manage teaching staff</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-between items-center">
-              <div className="text-sm text-muted-foreground">
-                {dashboardData.stats.totalInstructors} active instructors
+        <Link href="/courses">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5" />
+                Manage Courses
+              </CardTitle>
+              <CardDescription>Create and edit course content</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-between items-center">
+                <div className="text-sm text-muted-foreground">
+                  {dashboardData.stats.totalCourses} courses available
+                </div>
+                <ArrowRight className="h-4 w-4" />
               </div>
-              <ArrowRight className="h-4 w-4" />
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/lessons">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2">
+                <Play className="h-5 w-5" />
+                Manage Lessons
+              </CardTitle>
+              <CardDescription>Create and organize lesson content</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-between items-center">
+                <div className="text-sm text-muted-foreground">{dashboardData.stats.totalLessons} lessons created</div>
+                <ArrowRight className="h-4 w-4" />
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/instructors">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                Manage Instructors
+              </CardTitle>
+              <CardDescription>Add and manage teaching staff</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-between items-center">
+                <div className="text-sm text-muted-foreground">
+                  {dashboardData.stats.totalInstructors} active instructors
+                </div>
+                <ArrowRight className="h-4 w-4" />
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
       {/* Main Content Grid */}
@@ -300,10 +318,12 @@ export default function Dashboard() {
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>Recent Courses</CardTitle>
-              <Button variant="ghost" size="sm">
-                View All
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Button>
+              <Link href="/courses">
+                <Button variant="ghost" size="sm">
+                  View All
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -338,10 +358,12 @@ export default function Dashboard() {
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>Recent Lessons</CardTitle>
-              <Button variant="ghost" size="sm">
-                View All
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Button>
+              <Link href="/lessons">
+                <Button variant="ghost" size="sm">
+                  View All
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
