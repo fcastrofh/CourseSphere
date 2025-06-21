@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Plus, Play, Calendar, User, Video, Edit, Trash2, Eye, Archive } from "lucide-react"
+import { Plus, Play, Calendar, User, Video, Edit, Trash2, Eye, Archive, ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -19,6 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import Link from "next/link"
 
 // Lesson class definition with specified attributes
 class Lesson {
@@ -291,9 +292,17 @@ export default function LessonManagement() {
   return (
     <div className="container mx-auto p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Lesson Management</h1>
-          <p className="text-muted-foreground">Create and manage video lessons</p>
+        <div className="flex items-center gap-4">
+          <Link href="/dashboard">
+            <Button variant="outline" size="sm">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Dashboard
+            </Button>
+          </Link>
+          <div>
+            <h1 className="text-3xl font-bold">Lesson Management</h1>
+            <p className="text-muted-foreground">Create and manage video lessons</p>
+          </div>
         </div>
 
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
